@@ -10,18 +10,21 @@
 
 @interface AppDelegate ()
 
+
 @end
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
-}
 
+#pragma mark - NSApplicationDelegate
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    NSWindow *window = [[NSApplication sharedApplication] windows].firstObject;
+    [window registerForDraggedTypes:@[NSFilenamesPboardType]];
+}
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+    
 }
-
 
 @end

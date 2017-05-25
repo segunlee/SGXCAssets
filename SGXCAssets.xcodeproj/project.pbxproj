@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6736C67F1ED57B180060F84A /* SGXCAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6736C67E1ED57B180060F84A /* SGXCAssetsViewController.m */; };
 		6786A7C21ED55EBE0056B1ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7C11ED55EBE0056B1ED /* AppDelegate.m */; };
 		6786A7C51ED55EBE0056B1ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7C41ED55EBE0056B1ED /* main.m */; };
-		6786A7C81ED55EBE0056B1ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7C71ED55EBE0056B1ED /* ViewController.m */; };
 		6786A7CA1ED55EBE0056B1ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6786A7C91ED55EBE0056B1ED /* Assets.xcassets */; };
 		6786A7CD1ED55EBE0056B1ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6786A7CB1ED55EBE0056B1ED /* Main.storyboard */; };
+		6786A7D61ED55F170056B1ED /* SGXCAssetsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7D51ED55F170056B1ED /* SGXCAssetsManager.m */; };
+		6786A7D91ED56A070056B1ED /* SGWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7D81ED56A070056B1ED /* SGWindow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6736C67D1ED57B180060F84A /* SGXCAssetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGXCAssetsViewController.h; sourceTree = "<group>"; };
+		6736C67E1ED57B180060F84A /* SGXCAssetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGXCAssetsViewController.m; sourceTree = "<group>"; };
 		6786A7BD1ED55EBE0056B1ED /* SGXCAssets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGXCAssets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6786A7C01ED55EBE0056B1ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6786A7C11ED55EBE0056B1ED /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6786A7C41ED55EBE0056B1ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6786A7C61ED55EBE0056B1ED /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6786A7C71ED55EBE0056B1ED /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6786A7C91ED55EBE0056B1ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6786A7CC1ED55EBE0056B1ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6786A7CE1ED55EBE0056B1ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6786A7D41ED55F170056B1ED /* SGXCAssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGXCAssetsManager.h; sourceTree = "<group>"; };
+		6786A7D51ED55F170056B1ED /* SGXCAssetsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGXCAssetsManager.m; sourceTree = "<group>"; };
+		6786A7D71ED56A070056B1ED /* SGWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWindow.h; sourceTree = "<group>"; };
+		6786A7D81ED56A070056B1ED /* SGWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWindow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +64,12 @@
 			children = (
 				6786A7C01ED55EBE0056B1ED /* AppDelegate.h */,
 				6786A7C11ED55EBE0056B1ED /* AppDelegate.m */,
-				6786A7C61ED55EBE0056B1ED /* ViewController.h */,
-				6786A7C71ED55EBE0056B1ED /* ViewController.m */,
+				6786A7D71ED56A070056B1ED /* SGWindow.h */,
+				6786A7D81ED56A070056B1ED /* SGWindow.m */,
+				6786A7D41ED55F170056B1ED /* SGXCAssetsManager.h */,
+				6786A7D51ED55F170056B1ED /* SGXCAssetsManager.m */,
+				6736C67D1ED57B180060F84A /* SGXCAssetsViewController.h */,
+				6736C67E1ED57B180060F84A /* SGXCAssetsViewController.m */,
 				6786A7C91ED55EBE0056B1ED /* Assets.xcassets */,
 				6786A7CB1ED55EBE0056B1ED /* Main.storyboard */,
 				6786A7CE1ED55EBE0056B1ED /* Info.plist */,
@@ -102,6 +112,7 @@
 		6786A7B51ED55EBE0056B1ED /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SG;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = SGIOS;
 				TargetAttributes = {
@@ -147,8 +158,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6786A7C81ED55EBE0056B1ED /* ViewController.m in Sources */,
+				6786A7D91ED56A070056B1ED /* SGWindow.m in Sources */,
+				6786A7D61ED55F170056B1ED /* SGXCAssetsManager.m in Sources */,
 				6786A7C51ED55EBE0056B1ED /* main.m in Sources */,
+				6736C67F1ED57B180060F84A /* SGXCAssetsViewController.m in Sources */,
 				6786A7C21ED55EBE0056B1ED /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +314,7 @@
 				6786A7D31ED55EBE0056B1ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

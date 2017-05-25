@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SGXCAssetsViewController.h
 //  SGXCAssets
 //
 //  Created by SegunLee on 2017. 5. 24..
@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
-
+@interface SGXCAssetsViewController : NSViewController
 
 @end
-
