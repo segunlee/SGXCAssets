@@ -44,6 +44,11 @@
     
     // Button Setup
     _processButton.enabled = NO;
+    
+    
+    // Unregister block dragging
+    [_aImageView unregisterDraggedTypes];
+    [_iImageView unregisterDraggedTypes];
 }
 
 
