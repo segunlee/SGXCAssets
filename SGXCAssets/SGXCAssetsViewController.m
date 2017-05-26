@@ -103,7 +103,7 @@
                 [alert setAlertStyle:NSAlertStyleInformational];
                 [alert setMessageText:@"SGXCAssets"];
                 [alert setInformativeText:complete.resultMessage];
-                [alert addButtonWithTitle:@"OK"];
+                [alert addButtonWithTitle:NSLocalizedString(@"CONFIRM", nil)];
                 [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
             });
             
@@ -117,8 +117,8 @@
                 [alert setAlertStyle:NSAlertStyleInformational];
                 [alert setMessageText:@"SGXCAssets"];
                 [alert setInformativeText:message];
-                [alert addButtonWithTitle:@"YES"];
-                [alert addButtonWithTitle:@"NO"];
+                [alert addButtonWithTitle:NSLocalizedString(@"YES", nil)];
+                [alert addButtonWithTitle:NSLocalizedString(@"NO", nil)];
                 [alert beginSheetModalForWindow:SGWindowInstance completionHandler:^(NSModalResponse returnCode) {
                     returnValue = returnCode == 1000;
                     dispatch_semaphore_signal(sema);
@@ -133,35 +133,29 @@
 }
 
 - (IBAction)didTappedHelpCreate:(id)sender {
-    NSString *message = @"Add images to .xcassets\nIf there are duplicate images, ignore them.\n\n선택한 이미지를 .xcassets에 추가합니다.\n기존 이미지가 있다면 무시됩니다.";
-    
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setAlertStyle:NSAlertStyleInformational];
-    [alert setMessageText:@"Create?"];
-    [alert setInformativeText:message];
-    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:NSLocalizedString(@"CREATE?", nil)];
+    [alert setInformativeText:NSLocalizedString(@"CREATEDESC", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"CONFIRM", nil)];
     [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
 }
 
 - (IBAction)didTappedHelpUpdate:(id)sender {
-    NSString *message = @"Update the image in the existing .xcassets.\nIgnore any images that are not generated.\n\n.xcassets의 이미지를 선택한 이미지 기준으로 업데이트합니다.\n기존 이미지가 없다면 무시됩니다.";
-    
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setAlertStyle:NSAlertStyleInformational];
-    [alert setMessageText:@"Update?"];
-    [alert setInformativeText:message];
-    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:NSLocalizedString(@"UPDATE?", nil)];
+    [alert setInformativeText:NSLocalizedString(@"UPDATEDESC", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"CONFIRM", nil)];
     [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
 }
 
 - (IBAction)didTappedHelpDelete:(id)sender {
-    NSString *message = @"Delete images by comparing them with 'Drag into Images' and Images in .xcassets\n\n선택한 이미지 기준으로 .xcassets의 이미지를 삭제합니다.";
-    
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setAlertStyle:NSAlertStyleInformational];
-    [alert setMessageText:@"Delete?"];
-    [alert setInformativeText:message];
-    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:NSLocalizedString(@"DELETE?", nil)];
+    [alert setInformativeText:NSLocalizedString(@"DELETEDESC", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"CONFIRM", nil)];
     [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
 }
 

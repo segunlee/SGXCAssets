@@ -330,7 +330,7 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
     }
     
     if (removeImageSetPaths.count) {
-        NSString *message = [NSString stringWithFormat:@"Found %zd unused image files.\nAre you sure you want to delete?", removeImageSetPaths.count];
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"DELETE_ALERT_FORMAT", nil), removeImageSetPaths.count];
         if (_interrupt(message)) {
             for (NSString *path in removeImageSetPaths) {
                 [fileManager removeItemAtPath:path error:NULL];

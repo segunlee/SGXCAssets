@@ -1,0 +1,48 @@
+
+/* Class = "NSMenuItem"; title = "SGXCAssets"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "SGXCAssets";
+
+/* Class = "NSMenuItem"; title = "Quit SGXCAssets"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit SGXCAssets";
+
+/* Class = "NSMenuItem"; title = "About SGXCAssets"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About SGXCAssets";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSTextFieldCell"; title = "Drag into .xcassets directory"; ObjectID = "DfI-48-fhM"; */
+"DfI-48-fhM.title" = ".xcassets 디렉토리를 이곳으로 Drag 하세요";
+
+/* Class = "NSTextFieldCell"; title = "Process mod select"; ObjectID = "ENl-uB-Y9q"; */
+"ENl-uB-Y9q.title" = "처리 모드 선택";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "Help";
+
+/* Class = "NSMenuItem"; title = "SGXCAssets Help"; ObjectID = "FKE-Sm-Kum"; */
+"FKE-Sm-Kum.title" = "SGXCAssets Help";
+
+/* Class = "NSButtonCell"; title = "Update"; ObjectID = "FaF-C5-76T"; */
+"FaF-C5-76T.title" = "업데이트 모드";
+
+/* Class = "NSWindow"; title = "SGXCAssets"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "SGXCAssets";
+
+/* Class = "NSButtonCell"; title = "Process"; ObjectID = "J7n-Bb-bPz"; */
+"J7n-Bb-bPz.title" = "처리하기";
+
+/* Class = "NSButtonCell"; title = "Create"; ObjectID = "bOO-6l-Fw2"; */
+"bOO-6l-Fw2.title" = "생성 모드";
+
+/* Class = "NSButtonCell"; title = "Delete"; ObjectID = "gtl-bN-4eK"; */
+"gtl-bN-4eK.title" = "제거 모드";
+
+/* Class = "NSMenu"; title = "SGXCAssets"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "SGXCAssets";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "Help";
+
+/* Class = "NSTextFieldCell"; title = "Drag into images"; ObjectID = "wsf-KB-caN"; */
+"wsf-KB-caN.title" = "이미지 파일들을 이곳으로 Drag 하세요.";

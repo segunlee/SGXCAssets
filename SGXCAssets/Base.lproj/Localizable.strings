@@ -1,0 +1,23 @@
+/* 
+  strings.strings
+  SGXCAssets
+
+  Created by SegunLee on 2017. 5. 26..
+  Copyright © 2017년 SGIOS. All rights reserved.
+*/
+
+"OK" = "OK";
+"YES" = "YES";
+"NO" = "NO";
+"CONFIRM" = "Confirm";
+
+"CREATE?" = "Create?";
+"CREATEDESC" = "Add images to .xcassets\nIf there are duplicate images, ignore them.\n\nNot support folder in .xcassets";
+
+"UPDATE?" = "Update?";
+"UPDATEDESC" = "Update the image in the existing .xcassets.\nIgnore any images that are not generated.\n\nNot support folder in .xcassets";
+
+"DELETE?" = "Delete?";
+"DELETEDESC" = "Delete images by comparing them with 'Drag into Images' and Images in .xcassets\n\nNot support folder in .xcassets";
+
+"DELETE_ALERT_FORMAT" = "Found %zd unused image files.\nAre you sure you want to delete?";
