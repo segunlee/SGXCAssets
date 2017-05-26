@@ -26,6 +26,54 @@ NSString * const SGDefaultVersionValue = @"1";
 NSString * const SGDefaultAuthorValue = @"SGXCAssets";
 
 
+@implementation SGXCAssetsManagerResult
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _createFiles = [NSMutableArray new];
+        _updateFiles = [NSMutableArray new];
+        _deleteFiles = [NSMutableArray new];
+    }
+    return self;
+}
+
+- (NSString *)resultMessage {
+    NSMutableString *result = [[NSMutableString alloc] init];
+    [result appendFormat:@"Result: %@\n", _result ? @"Complete" : @"Failed"];
+    
+    if (_createFiles.count > 0) {
+        [result appendFormat:@"\nCreate Files %zd\n", _createFiles.count];
+        for (NSString *log in _createFiles) {
+            [result appendFormat:@"%@\n", log];
+        }
+    }
+    
+    if (_updateFiles.count > 0) {
+        [result appendFormat:@"\nUpdate Files %zd\n", _updateFiles.count];
+        for (NSString *log in _updateFiles) {
+            [result appendFormat:@"%@\n", log];
+        }
+    }
+    
+    if (_deleteFiles.count > 0) {
+        [result appendFormat:@"\nDelete Files %zd\n", _deleteFiles.count];
+        for (NSString *log in _deleteFiles) {
+            [result appendFormat:@"%@\n", log];
+        }
+    }
+    
+    if (_createFiles.count + _updateFiles.count + _deleteFiles.count == 0) {
+        [result appendString:@"\nNo changes."];
+    }
+    
+    NSLog(@"%@", result);
+    return result;
+}
+
+@end
+
+
 @interface SGXCAssetsManager()
 
 @property (nonatomic, copy) NSString *xcassetsPath;
@@ -33,6 +81,7 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
 @property (nonatomic, assign) SGXCAssetsOption option;
 @property (nonatomic, copy) SGXCAssetsManagerCompletion completion;
 @property (nonatomic, copy) SGXCAssetsManagerInterrupt interrupt;
+@property (nonatomic, strong) SGXCAssetsManagerResult *result;
 
 @end
 
@@ -73,6 +122,8 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
     _option = option;
     _completion = completion;
     _interrupt = interrupt;
+    _result = [[SGXCAssetsManagerResult alloc] init];
+    
     __weak typeof(self) wSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __strong typeof(wSelf) self = wSelf;
@@ -83,7 +134,7 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
 
 #pragma mark - Private
 - (void)process {
-    BOOL returnValue = NO;
+    BOOL returnValue = YES;
     
     if (_option & SGXCAssetsOptionC) {
         BOOL result = [self processImagesCreate];
@@ -100,7 +151,9 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
         returnValue = returnValue && result;
     }
     
-    _completion(returnValue);
+    _result.result = returnValue;
+    
+    _completion(_result);
 }
 
 - (BOOL)processImagesCreate {
@@ -138,6 +191,8 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
         } else {
             contentsJson = [self makeEmptyContentJson];
         }
+        
+        [_result.createFiles addObject:[NSString stringWithFormat:@"File: %@     Sacle: %@", key, scale]];
         
         contentsJsons[key] = contentsJson;
         
@@ -198,13 +253,21 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
         
         contentsJsons[key] = contentsJson;
         
+        // If destinationPath file exist, trash to file
+        NSString *destinationPath = [imageSetPath stringByAppendingPathComponent:fileName];
+        
+        //
+        if ([fileManager contentsEqualAtPath:imagePath andPath:destinationPath]) {
+            continue;
+        }
+        
         // If directory not exist, create directory
         if ([fileManager fileExistsAtPath:imageSetPath] == NO) {
             [fileManager createDirectoryAtPath:imageSetPath withIntermediateDirectories:YES attributes:nil error:NULL];
         }
         
-        // If destinationPath file exist, trash to file
-        NSString *destinationPath = [imageSetPath stringByAppendingPathComponent:fileName];
+        [_result.updateFiles addObject:[NSString stringWithFormat:@"File: %@     Sacle: %@", key, scale]];
+        
         if ([fileManager fileExistsAtPath:destinationPath] == YES) {
             [fileManager trashItemAtURL:[NSURL fileURLWithPath:destinationPath] resultingItemURL:nil error:NULL];
         }
@@ -261,6 +324,7 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
         }
         
         if (used == NO) {
+            [_result.deleteFiles addObject:[NSString stringWithFormat:@"File: %@.imageset", key]];
             [removeImageSetPaths addObject:imageSetPath];
         }
     }

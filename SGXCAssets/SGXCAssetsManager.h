@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@interface SGXCAssetsManagerResult : NSObject
+@property (nonatomic, assign) BOOL result;
+@property (nonatomic, readonly, nullable) NSString *resultMessage;
+@property (nonatomic, strong, nonnull) NSMutableArray *createFiles;
+@property (nonatomic, strong, nonnull) NSMutableArray *updateFiles;
+@property (nonatomic, strong, nonnull) NSMutableArray *deleteFiles;
+@end
+
+
 /**
  SGXCAssetsOption
 
@@ -24,7 +33,7 @@ typedef NS_OPTIONS(NSUInteger, SGXCAssetsOption) {
     SGXCAssetsOptionAll = ~0UL
 };
 
-typedef void (^SGXCAssetsManagerCompletion)(BOOL complete);
+typedef void (^SGXCAssetsManagerCompletion)(SGXCAssetsManagerResult * _Nonnull result);
 typedef NSInteger (^SGXCAssetsManagerInterrupt) (NSString * _Nonnull message);
 
 extern NSString * _Nonnull const SGXCAssetsExtension;

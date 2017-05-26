@@ -97,13 +97,13 @@
             option = option | SGXCAssetsOptionD;
         }
         
-        [_assetsManager processWithOption:option completion:^(BOOL complete) {
+        [_assetsManager processWithOption:option completion:^(SGXCAssetsManagerResult *complete) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
                 [alert setAlertStyle:NSAlertStyleInformational];
                 [alert setMessageText:@"SGXCAssets"];
-                [alert setInformativeText:@"Complete"];
+                [alert setInformativeText:complete.resultMessage];
                 [alert addButtonWithTitle:@"OK"];
                 [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
             });
