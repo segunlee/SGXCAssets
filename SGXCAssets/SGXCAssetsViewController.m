@@ -39,7 +39,6 @@
     // SGWindowDraggingDelegate Setup
     SGWindowInstance.draggingDelegate = self;
     
-    
     // SGXCAssetsManager Setup
     _assetsManager = [[SGXCAssetsManager alloc] init];
     
