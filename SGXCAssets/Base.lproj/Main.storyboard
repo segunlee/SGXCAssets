@@ -98,7 +98,7 @@
                                                     <constraint firstAttribute="height" constant="48" id="U8f-ig-oJS"/>
                                                     <constraint firstAttribute="width" constant="48" id="hBa-dn-HRv"/>
                                                 </constraints>
-                                                <imageCell key="cell" enabled="NO" focusRingType="none" alignment="left" imageScaling="proportionallyDown" image="assets_add" id="pol-86-VAE"/>
+                                                <imageCell key="cell" enabled="NO" focusRingType="none" alignment="left" imageScaling="proportionallyDown" image="ic_directory_add" id="pol-86-VAE"/>
                                             </imageView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpO-5b-J4g">
                                                 <rect key="frame" x="61" y="34" width="178" height="17"/>
@@ -133,7 +133,7 @@
                                                     <constraint firstAttribute="height" constant="48" id="HS2-Si-86s"/>
                                                     <constraint firstAttribute="width" constant="48" id="zZh-qc-kWd"/>
                                                 </constraints>
-                                                <imageCell key="cell" enabled="NO" focusRingType="none" alignment="left" imageScaling="proportionallyDown" image="images_add" id="BcZ-Oc-tkJ"/>
+                                                <imageCell key="cell" enabled="NO" focusRingType="none" alignment="left" imageScaling="proportionallyDown" image="ic_images_add" id="BcZ-Oc-tkJ"/>
                                             </imageView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEo-RP-79H">
                                                 <rect key="frame" x="97" y="34" width="107" height="17"/>
@@ -292,7 +292,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="assets_add" width="47.505153656005859" height="47.505153656005859"/>
-        <image name="images_add" width="48" height="48"/>
+        <image name="ic_directory_add" width="128" height="128"/>
+        <image name="ic_images_add" width="128" height="128"/>
     </resources>
 </document>

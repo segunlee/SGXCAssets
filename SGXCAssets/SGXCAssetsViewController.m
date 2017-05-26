@@ -63,13 +63,13 @@
                 returnValue = [_assetsManager setXCAssetsPath:filePath];
             }
         }
-        _aImageView.image = [NSImage imageNamed:returnValue ? @"assets_on" : @"assets_add"];
+        _aImageView.image = [NSImage imageNamed:returnValue ? @"ic_directory_done" : @"ic_directory_add"];
     }
     // setInputImagesPaths
     else if (NSPointInRect(point, _iView.frame) == YES)
     {
         returnValue = [_assetsManager setInputImagesPaths:filePaths];
-        _iImageView.image = [NSImage imageNamed:returnValue ? @"images_on" : @"images_add"];
+        _iImageView.image = [NSImage imageNamed:returnValue ? @"ic_images_done" : @"ic_images_add"];
     }
     
     _processButton.enabled = _assetsManager.readyToProcess;
