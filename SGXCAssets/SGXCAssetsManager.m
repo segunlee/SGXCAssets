@@ -76,6 +76,14 @@ NSString * const SGRenderingIntentOriginal = @"original";
     return result;
 }
 
+- (NSString *)deleteFileMessage {
+    NSMutableString *message = [[NSMutableString alloc] init];
+    for (NSString *log in _deleteFiles) {
+        [message appendFormat:@"%@\n", log];
+    }
+    return message;
+}
+
 @end
 
 
@@ -362,11 +370,16 @@ NSString * const SGRenderingIntentOriginal = @"original";
     }
     
     if (removeImageSetPaths.count) {
-        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"DELETE_ALERT_FORMAT", nil), removeImageSetPaths.count];
+        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"DELETE_ALERT_FORMAT", nil), removeImageSetPaths.count, _result.deleteFileMessage];
         if (_interrupt(message)) {
             for (NSString *path in removeImageSetPaths) {
                 [fileManager removeItemAtPath:path error:NULL];
             }
+        }
+        else
+        {
+            [_result.deleteFiles removeAllObjects];
+            [removeImageSetPaths removeAllObjects];
         }
     }
     

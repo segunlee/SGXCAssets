@@ -20,7 +20,7 @@
 "DELETE?" = "Delete?";
 "DELETEDESC" = "Delete images by comparing them with 'Drag into Images' and Images in .xcassets\n\nNot support folder in .xcassets";
 
-"DELETE_ALERT_FORMAT" = "Found %zd unused image files.\nAre you sure you want to delete?";
+"DELETE_ALERT_FORMAT" = "Found %zd unused image files.\nAre you sure you want to delete?\n\n%@";
 
 
 "A_LABEL_DEFAULT" = "Drag .xcassets directory here";

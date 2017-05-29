@@ -20,7 +20,7 @@
 "DELETE?" = "제거 모드란?";
 "DELETEDESC" = "선택한 이미지 기준으로 .xcassets의 이미지를 삭제합니다.\n\n.xcassets의 폴더구조는 지원하지 않습니다.";
 
-"DELETE_ALERT_FORMAT" = "%zd개의 사용하지 않는 이미지를 찾았습니다.\n삭제하시겠습니까?";
+"DELETE_ALERT_FORMAT" = "%zd개의 사용하지 않는 이미지를 찾았습니다.\n삭제하시겠습니까?\n\n%@";
 
 
 "A_LABEL_DEFAULT" = ".xcassets 디렉토리를 이곳으로 Drag 하세요";
