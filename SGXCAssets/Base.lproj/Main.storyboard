@@ -213,7 +213,7 @@
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="EZM-ad-j1w">
                                             <font key="font" metaFont="smallSystem"/>
                                             <segments>
-                                                <segment label="inherited" width="79" selected="YES"/>
+                                                <segment label="Inherited" width="79" selected="YES"/>
                                                 <segment label="Original" width="78" tag="1"/>
                                                 <segment label="Template" width="79"/>
                                             </segments>

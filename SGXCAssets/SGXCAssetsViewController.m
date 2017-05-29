@@ -185,6 +185,7 @@
     _updateOption.state = 1;
     _deleteOption.state = 0;
     _renderOption.integerValue = 0;
+    _processButton.enabled = NO;
     [self updateAStuff:NO];
     [self updateIStuff:NO];
 }

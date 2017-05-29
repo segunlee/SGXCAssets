@@ -72,7 +72,6 @@ NSString * const SGRenderingIntentOriginal = @"original";
         [result appendString:@"\nNo changes."];
     }
     
-    NSLog(@"%@", result);
     return result;
 }
 
