@@ -24,6 +24,11 @@ NSString * const SGScale2XValue = @"2x";
 NSString * const SGScale3XValue = @"3x";
 NSString * const SGDefaultVersionValue = @"1";
 NSString * const SGDefaultAuthorValue = @"SGXCAssets";
+NSString * const SGProperties = @"properties";
+NSString * const SGRenderingIntent = @"template-rendering-intent";
+NSString * const SGRenderingIntentTemplate = @"template";
+NSString * const SGRenderingIntentOriginal = @"original";
+
 
 
 @implementation SGXCAssetsManagerResult
@@ -79,6 +84,7 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
 @property (nonatomic, copy) NSString *xcassetsPath;
 @property (nonatomic, copy) NSArray *imagesPaths;
 @property (nonatomic, assign) SGXCAssetsOption option;
+@property (nonatomic, assign) SGXCAssetsRenderAs renderAs;
 @property (nonatomic, copy) SGXCAssetsManagerCompletion completion;
 @property (nonatomic, copy) SGXCAssetsManagerInterrupt interrupt;
 @property (nonatomic, strong) SGXCAssetsManagerResult *result;
@@ -127,8 +133,9 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
     }
 }
 
-- (void)processWithOption:(SGXCAssetsOption)option completion:(SGXCAssetsManagerCompletion _Nonnull)completion interrupt:(SGXCAssetsManagerInterrupt _Nonnull)interrupt {
+- (void)processWithOption:(SGXCAssetsOption)option renderAs:(SGXCAssetsRenderAs)renderAs completion:(SGXCAssetsManagerCompletion _Nonnull)completion interrupt:(SGXCAssetsManagerInterrupt _Nonnull)interrupt {
     _option = option;
+    _renderAs = renderAs;
     _completion = completion;
     _interrupt = interrupt;
     _result = [[SGXCAssetsManagerResult alloc] init];
@@ -142,6 +149,7 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
 
 - (void)resetPaths {
     _option = SGXCAssetsOptionNone;
+    _renderAs = SGXCAssetsRenderAsInherited;
     _xcassetsPath = nil;
     _imagesPaths = nil;
 }
@@ -207,6 +215,8 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
             contentsJson = [self makeEmptyContentJson];
         }
         
+        contentsJson = [self updateRenderAs:_renderAs contentJson:contentsJson];
+        
         [_result.createFiles addObject:[NSString stringWithFormat:@"File: %@     Sacle: %@", key, scale]];
         
         contentsJsons[key] = contentsJson;
@@ -266,13 +276,20 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
         // If not exist, continue process
         if (contentsJson == nil) { continue; }
         
+        SGXCAssetsRenderAs currentRenderAs = [self getRenderAsWithContentJson:contentsJson];
+        
+        contentsJson = [self updateRenderAs:_renderAs contentJson:contentsJson];
+        
         contentsJsons[key] = contentsJson;
         
         // If destinationPath file exist, trash to file
         NSString *destinationPath = [imageSetPath stringByAppendingPathComponent:fileName];
         
-        //
+        
         if ([fileManager contentsEqualAtPath:imagePath andPath:destinationPath]) {
+            if (currentRenderAs != _renderAs) {
+                [_result.updateFiles addObject:[NSString stringWithFormat:@"File: %@     Sacle: %@", key, scale]];
+            }
             continue;
         }
         
@@ -407,6 +424,45 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
     return [@{SGImagesKey : images, SGInfoKey : info} mutableCopy];
 }
 
+- (NSDictionary *)updateRenderAs:(SGXCAssetsRenderAs)renderAs contentJson:(NSDictionary *)contentJson {
+    NSMutableDictionary *returnContentJson = [contentJson mutableCopy];
+    if (returnContentJson[SGProperties] != nil) {
+        [returnContentJson removeObjectForKey:SGProperties];
+    }
+    
+    if (renderAs == SGXCAssetsRenderAsInherited) {
+        return returnContentJson;
+    }
+    
+    [returnContentJson setValue:[self makeRenderingIntent:renderAs] forKey:SGProperties];
+    return returnContentJson;
+}
 
+- (SGXCAssetsRenderAs)getRenderAsWithContentJson:(NSDictionary *)contentJson {
+    if (contentJson[SGProperties] != nil)
+    {
+        if ([contentJson[SGProperties][SGRenderingIntent] isEqualToString:SGRenderingIntentOriginal])
+        {
+            return SGXCAssetsRenderAsOriginal;
+        }
+        else if ([contentJson[SGProperties][SGRenderingIntent] isEqualToString:SGRenderingIntentTemplate])
+        {
+            return SGXCAssetsRenderAsTemplate;
+        }
+    }
+    return SGXCAssetsRenderAsInherited;
+}
+
+- (NSDictionary *)makeRenderingIntent:(SGXCAssetsRenderAs)renderAs {
+    if (renderAs == SGXCAssetsRenderAsInherited) {
+        return nil;
+    }
+    
+    NSString *renderAsValue = SGRenderingIntentOriginal;
+    if (renderAs == SGXCAssetsRenderAsTemplate) {
+        renderAsValue = SGRenderingIntentTemplate;
+    }
+    return @{SGRenderingIntent : renderAsValue};
+}
 
 @end

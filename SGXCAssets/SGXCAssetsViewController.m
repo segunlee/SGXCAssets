@@ -10,6 +10,8 @@
 #import "SGWindow.h"
 #import "SGXCAssetsManager.h"
 
+
+
 @interface SGXCAssetsViewController ()<SGWindowDraggingDelegate>
 
 @property (strong) SGXCAssetsManager *assetsManager;
@@ -27,6 +29,8 @@
 @property (weak) IBOutlet NSButton *createOption;
 @property (weak) IBOutlet NSButton *updateOption;
 @property (weak) IBOutlet NSButton *deleteOption;
+
+@property (weak) IBOutlet NSSegmentedControl *renderOption;
 
 @property (weak) IBOutlet NSButton *processButton;
 
@@ -134,7 +138,7 @@
             option = option | SGXCAssetsOptionD;
         }
         
-        [_assetsManager processWithOption:option completion:^(SGXCAssetsManagerResult *complete) {
+        [_assetsManager processWithOption:option renderAs:_renderOption.integerValue completion:^(SGXCAssetsManagerResult *complete) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
@@ -174,6 +178,7 @@
     _createOption.state = 1;
     _updateOption.state = 1;
     _deleteOption.state = 0;
+    _renderOption.integerValue = 0;
     [self updateAStuff:NO];
     [self updateIStuff:NO];
 }

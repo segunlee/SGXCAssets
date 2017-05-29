@@ -33,6 +33,19 @@ typedef NS_OPTIONS(NSUInteger, SGXCAssetsOption) {
     SGXCAssetsOptionAll = ~0UL
 };
 
+/**
+ SGXCAssetsRenderAs
+
+ - SGXCAssetsRenderAsInherited: Inherited
+ - SGXCAssetsRenderAsOriginal: Original
+ - SGXCAssetsRenderAsTemplate: Template
+ */
+typedef NS_ENUM(NSUInteger, SGXCAssetsRenderAs) {
+    SGXCAssetsRenderAsInherited = 0,
+    SGXCAssetsRenderAsOriginal,
+    SGXCAssetsRenderAsTemplate
+};
+
 typedef void (^SGXCAssetsManagerCompletion)(SGXCAssetsManagerResult * _Nonnull result);
 typedef NSInteger (^SGXCAssetsManagerInterrupt) (NSString * _Nonnull message);
 
@@ -46,7 +59,7 @@ extern NSString * _Nonnull const SGXCAssetsExtension;
 
 - (BOOL)setXCAssetsPath:(nonnull NSString *)xcassetsPath;
 - (BOOL)setInputImagesPaths:(nonnull NSArray *)inputImagesPaths;
-- (void)processWithOption:(SGXCAssetsOption)option completion:(SGXCAssetsManagerCompletion _Nonnull)completion interrupt:(SGXCAssetsManagerInterrupt _Nonnull)interrupt;
+- (void)processWithOption:(SGXCAssetsOption)option renderAs:(SGXCAssetsRenderAs)renderAs completion:(SGXCAssetsManagerCompletion _Nonnull)completion interrupt:(SGXCAssetsManagerInterrupt _Nonnull)interrupt;
 - (void)resetPaths;
 
 @end
