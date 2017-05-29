@@ -21,3 +21,10 @@
 "DELETEDESC" = "선택한 이미지 기준으로 .xcassets의 이미지를 삭제합니다.\n\n.xcassets의 폴더구조는 지원하지 않습니다.";
 
 "DELETE_ALERT_FORMAT" = "%zd개의 사용하지 않는 이미지를 찾았습니다.\n삭제하시겠습니까?";
+
+
+"A_LABEL_DEFAULT" = ".xcassets 디렉토리를 이곳으로 Drag 하세요";
+"A_LABEL_SELECTED_FORMAT" = "%@의 .xcassets이 선택되었습니다";
+
+"I_LABEL_DEFAULT" = "이미지 파일들을 이곳으로 Drag 하세요";
+"I_LABEL_SELECTED_FORMAT" = "%zd개의 이미지가 선택되었습니다";

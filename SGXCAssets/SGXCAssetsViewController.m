@@ -17,10 +17,12 @@
 @property (weak) IBOutlet NSView *aView;
 @property (weak) IBOutlet NSImageView *aImageView;
 @property (weak) IBOutlet NSColorWell *aColorWell;
+@property (weak) IBOutlet NSTextField *aLabel;
 
 @property (weak) IBOutlet NSView *iView;
 @property (weak) IBOutlet NSImageView *iImageView;
 @property (weak) IBOutlet NSColorWell *iColorWell;
+@property (weak) IBOutlet NSTextField *iLabel;
 
 @property (weak) IBOutlet NSButton *createOption;
 @property (weak) IBOutlet NSButton *updateOption;
@@ -45,7 +47,6 @@
     // Button Setup
     _processButton.enabled = NO;
     
-    
     // Unregister block dragging
     [_aImageView unregisterDraggedTypes];
     [_iImageView unregisterDraggedTypes];
@@ -68,18 +69,50 @@
                 returnValue = [_assetsManager setXCAssetsPath:filePath];
             }
         }
-        _aImageView.image = [NSImage imageNamed:returnValue ? @"ic_directory_done" : @"ic_directory_add"];
+        [self updateAStuff:returnValue];
     }
     // setInputImagesPaths
     else if (NSPointInRect(point, _iView.frame) == YES)
     {
         returnValue = [_assetsManager setInputImagesPaths:filePaths];
-        _iImageView.image = [NSImage imageNamed:returnValue ? @"ic_images_done" : @"ic_images_add"];
+        [self updateIStuff:returnValue];
     }
     
     _processButton.enabled = _assetsManager.readyToProcess;
     
     return returnValue;
+}
+
+
+#pragma mark - UI Update
+- (void)updateAStuff:(BOOL)active {
+    _aImageView.image = [NSImage imageNamed:active ? @"ic_directory_done" : @"ic_directory_add"];
+    _aColorWell.color = active ? [NSColor colorWithSRGBRed:0.3743 green:0.7419 blue:0.4814 alpha:1.0] : [NSColor whiteColor];
+    _aLabel.textColor = active ? [NSColor whiteColor] : [NSColor blackColor];
+    
+    if (active)
+    {
+        _aLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"A_LABEL_SELECTED_FORMAT", nil), _assetsManager.xcassetsProjectName];
+    }
+    else
+    {
+        _aLabel.stringValue = NSLocalizedString(@"A_LABEL_DEFAULT", nil);
+    }
+}
+
+- (void)updateIStuff:(BOOL)active {
+    _iImageView.image = [NSImage imageNamed:active ? @"ic_images_done" : @"ic_images_add"];
+    _iColorWell.color = active ? [NSColor colorWithSRGBRed:0.3743 green:0.7419 blue:0.4814 alpha:1.0] : [NSColor whiteColor];
+    _iLabel.textColor = active ? [NSColor whiteColor] : [NSColor blackColor];
+
+    if (active)
+    {
+        _iLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"I_LABEL_SELECTED_FORMAT", nil), _assetsManager.inputImagesCount];
+    }
+    else
+    {
+        _iLabel.stringValue = NSLocalizedString(@"I_LABEL_DEFAULT", nil);
+    }
 }
 
 
@@ -133,9 +166,18 @@
             dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
             return returnValue;
         }];
-        
     }
 }
+
+- (IBAction)didTappedReset:(id)sender {
+    [_assetsManager resetPaths];
+    _createOption.state = 1;
+    _updateOption.state = 1;
+    _deleteOption.state = 0;
+    [self updateAStuff:NO];
+    [self updateIStuff:NO];
+}
+
 
 - (IBAction)didTappedHelpCreate:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];

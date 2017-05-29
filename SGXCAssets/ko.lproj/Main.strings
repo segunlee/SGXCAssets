@@ -1,4 +1,3 @@
-
 /* Class = "NSMenuItem"; title = "SGXCAssets"; ObjectID = "1Xt-HY-uBw"; */
 "1Xt-HY-uBw.title" = "SGXCAssets";
 
@@ -32,6 +31,9 @@
 /* Class = "NSButtonCell"; title = "Process"; ObjectID = "J7n-Bb-bPz"; */
 "J7n-Bb-bPz.title" = "처리하기";
 
+/* Class = "NSButtonCell"; title = "Reset"; ObjectID = "UZm-dE-aaK"; */
+"UZm-dE-aaK.title" = "리셋";
+
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "bOO-6l-Fw2"; */
 "bOO-6l-Fw2.title" = "생성 모드";
 
@@ -45,4 +47,4 @@
 "wpr-3q-Mcd.title" = "Help";
 
 /* Class = "NSTextFieldCell"; title = "Drag images here"; ObjectID = "wsf-KB-caN"; */
-"wsf-KB-caN.title" = "이미지 파일들을 이곳으로 Drag 하세요.";
+"wsf-KB-caN.title" = "이미지 파일들을 이곳으로 Drag 하세요";

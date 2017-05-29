@@ -92,10 +92,20 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
     return _xcassetsPath.length > 0 && _imagesPaths.count > 0;
 }
 
+- (NSInteger)inputImagesCount {
+    return _imagesPaths.count;
+}
+
+- (NSString *)xcassetsProjectName {
+    if (_xcassetsPath.pathComponents.count > 2) {
+        return [_xcassetsPath pathComponents][_xcassetsPath.pathComponents.count-2];
+    }
+    return @"Unknown";
+}
+
 - (BOOL)setXCAssetsPath:(nonnull NSString *)xcassetsPath {
     if ([[xcassetsPath pathExtension] isEqualToString:SGXCAssetsExtension] == YES) {
         _xcassetsPath = xcassetsPath;
-        NSLog(@"Setted _xcassetsPath");
         return YES;
     } else {
         return NO;
@@ -111,7 +121,6 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
     NSArray *filteredArray = [inputImagesPaths filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension IN %@", extensions]];
     if (filteredArray.count) {
         _imagesPaths = filteredArray;
-        NSLog(@"Setted _imagesPaths");
         return YES;
     } else {
         return NO;
@@ -129,6 +138,12 @@ NSString * const SGDefaultAuthorValue = @"SGXCAssets";
         __strong typeof(wSelf) self = wSelf;
         [self process];
     });
+}
+
+- (void)resetPaths {
+    _option = SGXCAssetsOptionNone;
+    _xcassetsPath = nil;
+    _imagesPaths = nil;
 }
 
 

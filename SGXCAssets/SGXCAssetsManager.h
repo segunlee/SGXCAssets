@@ -41,9 +41,12 @@ extern NSString * _Nonnull const SGXCAssetsExtension;
 
 #pragma mark - Public
 @property (nonatomic, readonly) BOOL readyToProcess;
+@property (nonatomic, readonly) NSInteger inputImagesCount;
+@property (nonatomic, readonly, nonnull) NSString *xcassetsProjectName;
 
 - (BOOL)setXCAssetsPath:(nonnull NSString *)xcassetsPath;
 - (BOOL)setInputImagesPaths:(nonnull NSArray *)inputImagesPaths;
 - (void)processWithOption:(SGXCAssetsOption)option completion:(SGXCAssetsManagerCompletion _Nonnull)completion interrupt:(SGXCAssetsManagerInterrupt _Nonnull)interrupt;
+- (void)resetPaths;
 
 @end
