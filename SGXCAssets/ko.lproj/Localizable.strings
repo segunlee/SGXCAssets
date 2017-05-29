@@ -28,3 +28,5 @@
 
 "I_LABEL_DEFAULT" = "이미지 파일들을 이곳으로 Drag 하세요";
 "I_LABEL_SELECTED_FORMAT" = "%zd개의 이미지가 선택되었습니다";
+
+"IMAGE_SCALE_SUFFIX_NAME_WRONG_FORMAT" = "이미지 Scale명에 문제가 있습니다.\nFile: %@\n\n확인을 누르면 나머지 작업을 진행합니다.";

@@ -28,3 +28,5 @@
 
 "I_LABEL_DEFAULT" = "Drag images here";
 "I_LABEL_SELECTED_FORMAT" = "Selected %zd images";
+
+"IMAGE_SCALE_SUFFIX_NAME_WRONG_FORMAT" = "There is something wrong with the image scale suffix name.\nFile: %@\n\nPress Confirm to continue with the rest of the operation.";

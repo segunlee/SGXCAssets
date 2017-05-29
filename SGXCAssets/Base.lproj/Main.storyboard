@@ -211,7 +211,7 @@
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yR8-iH-oGr">
                                         <rect key="frame" x="18" y="99" width="244" height="24"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="EZM-ad-j1w">
-                                            <font key="font" metaFont="system" size="11"/>
+                                            <font key="font" metaFont="smallSystem"/>
                                             <segments>
                                                 <segment label="inherited" width="79" selected="YES"/>
                                                 <segment label="Original" width="78" tag="1"/>

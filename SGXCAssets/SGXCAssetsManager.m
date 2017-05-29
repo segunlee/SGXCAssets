@@ -198,7 +198,17 @@ NSString * const SGRenderingIntentOriginal = @"original";
         NSString *fileName = [imagePath lastPathComponent];
         NSArray *components = [[fileName stringByDeletingPathExtension] componentsSeparatedByString:@"@"];
         NSString *key = components[0];
-        NSString *scale = [components count] > 1 ? components[1] : SGScale1XValue;
+        NSString *scale = SGScale1XValue;
+        if ([components count] > 1) {
+            scale = components[1];
+            if (!([scale isEqualToString:SGScale2XValue] || [scale isEqualToString:SGScale3XValue])) {
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"IMAGE_SCALE_SUFFIX_NAME_WRONG_FORMAT", nil), fileName];
+                if (_interrupt(message, @[NSLocalizedString(@"CONFIRM", nil)])) {
+                    continue;
+                }
+            }
+        }
+        
         
         NSString *imageSetPath = [self imageSetPathWithAssetPath:self.xcassetsPath fileName:key];
         NSDictionary *contentsJson = contentsJsons[key];
@@ -276,7 +286,16 @@ NSString * const SGRenderingIntentOriginal = @"original";
         NSString *fileName = [imagePath lastPathComponent];
         NSArray *components = [[fileName stringByDeletingPathExtension] componentsSeparatedByString:@"@"];
         NSString *key = components[0];
-        NSString *scale = [components count] > 1 ? components[1] : SGScale1XValue;
+        NSString *scale = SGScale1XValue;
+        if ([components count] > 1) {
+            scale = components[1];
+            if (!([scale isEqualToString:SGScale2XValue] || [scale isEqualToString:SGScale3XValue])) {
+                NSString *message = [NSString stringWithFormat:NSLocalizedString(@"IMAGE_SCALE_SUFFIX_NAME_WRONG_FORMAT", nil), fileName];
+                if (_interrupt(message, @[NSLocalizedString(@"CONFIRM", nil)])) {
+                    continue;
+                }
+            }
+        }
         
         NSString *imageSetPath = [self imageSetPathWithAssetPath:self.xcassetsPath fileName:key];
         NSDictionary *contentsJson = contentsJsons[key];
@@ -371,7 +390,7 @@ NSString * const SGRenderingIntentOriginal = @"original";
     
     if (removeImageSetPaths.count) {
         NSString *message = [NSString stringWithFormat:NSLocalizedString(@"DELETE_ALERT_FORMAT", nil), removeImageSetPaths.count, _result.deleteFileMessage];
-        if (_interrupt(message)) {
+        if (_interrupt(message, @[NSLocalizedString(@"YES", nil), NSLocalizedString(@"NO", nil)])) {
             for (NSString *path in removeImageSetPaths) {
                 [fileManager removeItemAtPath:path error:NULL];
             }

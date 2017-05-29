@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, SGXCAssetsRenderAs) {
 };
 
 typedef void (^SGXCAssetsManagerCompletion)(SGXCAssetsManagerResult * _Nonnull result);
-typedef NSInteger (^SGXCAssetsManagerInterrupt) (NSString * _Nonnull message);
+typedef NSInteger (^SGXCAssetsManagerInterrupt) (NSString * _Nonnull message, NSArray * _Nonnull buttons);
 
 extern NSString * _Nonnull const SGXCAssetsExtension;
 @interface SGXCAssetsManager : NSObject

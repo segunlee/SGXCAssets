@@ -122,55 +122,61 @@
 
 #pragma mark - IBActions
 - (IBAction)didTappedProcess:(id)sender {
-    if (_assetsManager.readyToProcess) {
-        
-        SGXCAssetsOption option = SGXCAssetsOptionNone;
-        
-        if (_createOption.state) {
-            option = option | SGXCAssetsOptionC;
-        }
-        
-        if (_updateOption.state) {
-            option = option | SGXCAssetsOptionU;
-        }
-        
-        if (_deleteOption.state) {
-            option = option | SGXCAssetsOptionD;
-        }
-        
-        [_assetsManager processWithOption:option renderAs:_renderOption.integerValue completion:^(SGXCAssetsManagerResult *complete) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [[NSAlert alloc] init];
-                [alert setAlertStyle:NSAlertStyleInformational];
-                [alert setMessageText:@"SGXCAssets"];
-                [alert setInformativeText:complete.resultMessage];
-                [alert addButtonWithTitle:NSLocalizedString(@"CONFIRM", nil)];
-                [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
-            });
-            
-        } interrupt:^NSInteger(NSString *message) {
-            
-            __block dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-            __block BOOL returnValue = NO;
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSAlert *alert = [[NSAlert alloc] init];
-                [alert setAlertStyle:NSAlertStyleInformational];
-                [alert setMessageText:@"SGXCAssets"];
-                [alert setInformativeText:message];
-                [alert addButtonWithTitle:NSLocalizedString(@"YES", nil)];
-                [alert addButtonWithTitle:NSLocalizedString(@"NO", nil)];
-                [alert beginSheetModalForWindow:SGWindowInstance completionHandler:^(NSModalResponse returnCode) {
-                    returnValue = returnCode == 1000;
-                    dispatch_semaphore_signal(sema);
-                }];
-            });
-            
-            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-            return returnValue;
-        }];
+    if (_assetsManager.readyToProcess == NO) {
+        return;
     }
+    
+    SGXCAssetsOption option = SGXCAssetsOptionNone;
+    
+    if (_createOption.state) {
+        option = option | SGXCAssetsOptionC;
+    }
+    
+    if (_updateOption.state) {
+        option = option | SGXCAssetsOptionU;
+    }
+    
+    if (_deleteOption.state) {
+        option = option | SGXCAssetsOptionD;
+    }
+    _processButton.enabled = NO;
+    __weak typeof(self) _self = self;
+    [_assetsManager processWithOption:option renderAs:_renderOption.integerValue completion:^(SGXCAssetsManagerResult *complete) {
+        
+        __strong typeof(_self) self = _self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setAlertStyle:NSAlertStyleInformational];
+            [alert setMessageText:@"SGXCAssets"];
+            [alert setInformativeText:complete.resultMessage];
+            [alert addButtonWithTitle:NSLocalizedString(@"CONFIRM", nil)];
+            [alert beginSheetModalForWindow:SGWindowInstance completionHandler:^(NSModalResponse returnCode) {
+                self.processButton.enabled = YES;
+            }];
+        });
+        
+    } interrupt:^NSInteger(NSString *message, NSArray *buttons) {
+        
+        __block dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        __block BOOL returnValue = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setAlertStyle:NSAlertStyleInformational];
+            [alert setMessageText:@"SGXCAssets"];
+            [alert setInformativeText:message];
+            for (NSString *button in buttons) {
+                [alert addButtonWithTitle:button];
+            }
+            [alert beginSheetModalForWindow:SGWindowInstance completionHandler:^(NSModalResponse returnCode) {
+                returnValue = returnCode == 1000;
+                dispatch_semaphore_signal(sema);
+            }];
+        });
+        
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        return returnValue;
+    }];
 }
 
 - (IBAction)didTappedReset:(id)sender {
