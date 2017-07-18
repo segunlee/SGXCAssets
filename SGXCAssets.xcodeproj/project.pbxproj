@@ -15,6 +15,7 @@
 		6786A7D61ED55F170056B1ED /* SGXCAssetsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7D51ED55F170056B1ED /* SGXCAssetsManager.m */; };
 		6786A7D91ED56A070056B1ED /* SGWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7D81ED56A070056B1ED /* SGWindow.m */; };
 		67EABD1B1ED7D0FC00822E88 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 67EABD1D1ED7D0FC00822E88 /* Localizable.strings */; };
+		D7C9EE1DE34DB562FA8592F6 /* libPods-SGXCAssets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DE9B276EF68653B332902 /* libPods-SGXCAssets.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,9 @@
 		6786A7D81ED56A070056B1ED /* SGWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWindow.m; sourceTree = "<group>"; };
 		67EABD1C1ED7D0FC00822E88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		67EABD1E1ED7D0FE00822E88 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		68ACADADD384C059B82DCE36 /* Pods-SGXCAssets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGXCAssets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SGXCAssets/Pods-SGXCAssets.debug.xcconfig"; sourceTree = "<group>"; };
+		726CBA5E850D4F914CA26704 /* Pods-SGXCAssets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SGXCAssets.release.xcconfig"; path = "Pods/Target Support Files/Pods-SGXCAssets/Pods-SGXCAssets.release.xcconfig"; sourceTree = "<group>"; };
+		973DE9B276EF68653B332902 /* libPods-SGXCAssets.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SGXCAssets.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +45,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C9EE1DE34DB562FA8592F6 /* libPods-SGXCAssets.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F929A41F3DEA1E55D7A1FD8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				68ACADADD384C059B82DCE36 /* Pods-SGXCAssets.debug.xcconfig */,
+				726CBA5E850D4F914CA26704 /* Pods-SGXCAssets.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6786A7B41ED55EBE0056B1ED = {
 			isa = PBXGroup;
 			children = (
 				6786A7BF1ED55EBE0056B1ED /* SGXCAssets */,
 				6786A7BE1ED55EBE0056B1ED /* Products */,
+				4F929A41F3DEA1E55D7A1FD8 /* Pods */,
+				928D9E1A87AE9A96666CD862 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +107,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		928D9E1A87AE9A96666CD862 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				973DE9B276EF68653B332902 /* libPods-SGXCAssets.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,9 +122,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6786A7D11ED55EBE0056B1ED /* Build configuration list for PBXNativeTarget "SGXCAssets" */;
 			buildPhases = (
+				3408043EA937E602FD33D9FA /* [CP] Check Pods Manifest.lock */,
 				6786A7B91ED55EBE0056B1ED /* Sources */,
 				6786A7BA1ED55EBE0056B1ED /* Frameworks */,
 				6786A7BB1ED55EBE0056B1ED /* Resources */,
+				F2AF455DD7B2FC768F6BB7C9 /* [CP] Embed Pods Frameworks */,
+				9AB7C82AEF8B06F6A6D32788 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -159,6 +186,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3408043EA937E602FD33D9FA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9AB7C82AEF8B06F6A6D32788 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SGXCAssets/Pods-SGXCAssets-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2AF455DD7B2FC768F6BB7C9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SGXCAssets/Pods-SGXCAssets-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6786A7B91ED55EBE0056B1ED /* Sources */ = {
@@ -290,6 +365,7 @@
 		};
 		6786A7D21ED55EBE0056B1ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68ACADADD384C059B82DCE36 /* Pods-SGXCAssets.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -303,6 +379,7 @@
 		};
 		6786A7D31ED55EBE0056B1ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 726CBA5E850D4F914CA26704 /* Pods-SGXCAssets.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
