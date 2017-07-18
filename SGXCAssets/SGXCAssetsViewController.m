@@ -9,6 +9,7 @@
 #import "SGXCAssetsViewController.h"
 #import "SGWindow.h"
 #import "SGXCAssetsManager.h"
+#import "SGXCAssetsResultViewController.h"
 
 
 
@@ -83,7 +84,6 @@
     }
     
     _processButton.enabled = _assetsManager.readyToProcess;
-    
     return returnValue;
 }
 
@@ -108,7 +108,7 @@
     _iImageView.image = [NSImage imageNamed:active ? @"ic_images_done" : @"ic_images_add"];
     _iColorWell.color = active ? [NSColor colorWithSRGBRed:0.3743 green:0.7419 blue:0.4814 alpha:1.0] : [NSColor whiteColor];
     _iLabel.textColor = active ? [NSColor whiteColor] : [NSColor blackColor];
-
+    
     if (active)
     {
         _iLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"I_LABEL_SELECTED_FORMAT", nil), _assetsManager.inputImagesCount];
@@ -147,11 +147,16 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             NSAlert *alert = [[NSAlert alloc] init];
             [alert setAlertStyle:NSAlertStyleInformational];
-            [alert setMessageText:@"SGXCAssets"];
+            [alert setMessageText:[[NSBundle mainBundle] infoDictionary][@"CFBundleName"]];
             [alert setInformativeText:complete.resultMessage];
             [alert addButtonWithTitle:NSLocalizedString(@"CONFIRM", nil)];
+            [alert addButtonWithTitle:NSLocalizedString(@"RESULT_DETAIL", nil)];
             [alert beginSheetModalForWindow:SGWindowInstance completionHandler:^(NSModalResponse returnCode) {
                 self.processButton.enabled = YES;
+                if (returnCode == 1001) {
+                    SGXCAssetsResultViewController *vc = [[SGXCAssetsResultViewController alloc] initWithResultString:complete.resultMessage];
+                    [self presentViewControllerAsModalWindow:vc];
+                }
             }];
         });
         
@@ -163,7 +168,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             NSAlert *alert = [[NSAlert alloc] init];
             [alert setAlertStyle:NSAlertStyleInformational];
-            [alert setMessageText:@"SGXCAssets"];
+            [alert setMessageText:[[NSBundle mainBundle] infoDictionary][@"CFBundleName"]];
             [alert setInformativeText:message];
             for (NSString *button in buttons) {
                 [alert addButtonWithTitle:button];
@@ -184,7 +189,7 @@
     _createOption.state = 1;
     _updateOption.state = 1;
     _deleteOption.state = 0;
-    _renderOption.integerValue = 0;
+    _renderOption.integerValue = SGXCAssetsRenderAsOverride;
     _processButton.enabled = NO;
     [self updateAStuff:NO];
     [self updateIStuff:NO];

@@ -43,7 +43,8 @@ typedef NS_OPTIONS(NSUInteger, SGXCAssetsOption) {
 typedef NS_ENUM(NSUInteger, SGXCAssetsRenderAs) {
     SGXCAssetsRenderAsInherited = 0,
     SGXCAssetsRenderAsOriginal,
-    SGXCAssetsRenderAsTemplate
+    SGXCAssetsRenderAsTemplate,
+    SGXCAssetsRenderAsOverride
 };
 
 typedef void (^SGXCAssetsManagerCompletion)(SGXCAssetsManagerResult * _Nonnull result);

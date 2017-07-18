@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6736C67F1ED57B180060F84A /* SGXCAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6736C67E1ED57B180060F84A /* SGXCAssetsViewController.m */; };
+		67502E041F1DFAF100A93C4B /* SGXCAssetsResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67502E031F1DFAF100A93C4B /* SGXCAssetsResultViewController.m */; };
 		6786A7C21ED55EBE0056B1ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7C11ED55EBE0056B1ED /* AppDelegate.m */; };
 		6786A7C51ED55EBE0056B1ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786A7C41ED55EBE0056B1ED /* main.m */; };
 		6786A7CA1ED55EBE0056B1ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6786A7C91ED55EBE0056B1ED /* Assets.xcassets */; };
@@ -21,6 +22,8 @@
 /* Begin PBXFileReference section */
 		6736C67D1ED57B180060F84A /* SGXCAssetsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGXCAssetsViewController.h; sourceTree = "<group>"; };
 		6736C67E1ED57B180060F84A /* SGXCAssetsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGXCAssetsViewController.m; sourceTree = "<group>"; };
+		67502E021F1DFAF100A93C4B /* SGXCAssetsResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGXCAssetsResultViewController.h; sourceTree = "<group>"; };
+		67502E031F1DFAF100A93C4B /* SGXCAssetsResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGXCAssetsResultViewController.m; sourceTree = "<group>"; };
 		6757E6D71EDBBAC600B7B58A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		6786A7BD1ED55EBE0056B1ED /* SGXCAssets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SGXCAssets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6786A7C01ED55EBE0056B1ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				6786A7D51ED55F170056B1ED /* SGXCAssetsManager.m */,
 				6736C67D1ED57B180060F84A /* SGXCAssetsViewController.h */,
 				6736C67E1ED57B180060F84A /* SGXCAssetsViewController.m */,
+				67502E021F1DFAF100A93C4B /* SGXCAssetsResultViewController.h */,
+				67502E031F1DFAF100A93C4B /* SGXCAssetsResultViewController.m */,
 				6786A7C91ED55EBE0056B1ED /* Assets.xcassets */,
 				6786A7CB1ED55EBE0056B1ED /* Main.storyboard */,
 				6786A7CE1ED55EBE0056B1ED /* Info.plist */,
@@ -242,6 +247,7 @@
 			files = (
 				6786A7D91ED56A070056B1ED /* SGWindow.m in Sources */,
 				6786A7D61ED55F170056B1ED /* SGXCAssetsManager.m in Sources */,
+				67502E041F1DFAF100A93C4B /* SGXCAssetsResultViewController.m in Sources */,
 				6786A7C51ED55EBE0056B1ED /* main.m in Sources */,
 				6736C67F1ED57B180060F84A /* SGXCAssetsViewController.m in Sources */,
 				6786A7C21ED55EBE0056B1ED /* AppDelegate.m in Sources */,

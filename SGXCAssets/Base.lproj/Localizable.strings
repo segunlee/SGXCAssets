@@ -10,6 +10,7 @@
 "YES" = "YES";
 "NO" = "NO";
 "CONFIRM" = "Confirm";
+"RESULT_DETAIL" = "Result Details";
 
 "CREATE?" = "Create?";
 "CREATEDESC" = "Add images to .xcassets\nIf there are duplicate images, ignore them.\n\nNot support folder in .xcassets";

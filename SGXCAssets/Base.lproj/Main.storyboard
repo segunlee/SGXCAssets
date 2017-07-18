@@ -77,7 +77,7 @@
         <!--Assets View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="SGXCAssetsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SGXCAssetsViewController" id="XfG-lQ-9wD" customClass="SGXCAssetsViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="580" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -209,13 +209,14 @@
                                         </textFieldCell>
                                     </textField>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yR8-iH-oGr">
-                                        <rect key="frame" x="18" y="99" width="244" height="24"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="EZM-ad-j1w">
-                                            <font key="font" metaFont="smallSystem"/>
+                                        <rect key="frame" x="18" y="102" width="244" height="20"/>
+                                        <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="EZM-ad-j1w">
+                                            <font key="font" metaFont="system" size="10"/>
                                             <segments>
-                                                <segment label="Inherited" width="79" selected="YES"/>
-                                                <segment label="Original" width="78" tag="1"/>
-                                                <segment label="Template" width="79"/>
+                                                <segment label="Inherited"/>
+                                                <segment label="Original" tag="1"/>
+                                                <segment label="Template" tag="2"/>
+                                                <segment label="Override" selected="YES" tag="3"/>
                                             </segments>
                                         </segmentedCell>
                                     </segmentedControl>
@@ -330,6 +331,56 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="67" y="754"/>
+        </scene>
+        <!--Assets Result View Controller-->
+        <scene sceneID="4NC-wj-CZ8">
+            <objects>
+                <viewController storyboardIdentifier="SGXCAssetsResultViewController" id="Je9-OC-Kz1" customClass="SGXCAssetsResultViewController" sceneMemberID="viewController">
+                    <view key="view" id="SAh-ZP-npY">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tu-72-IjX">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <clipView key="contentView" id="gdc-7a-HP1">
+                                    <rect key="frame" x="1" y="1" width="433" height="298"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hdQ-KQ-JcH">
+                                            <rect key="frame" x="0.0" y="0.0" width="433" height="298"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="433" height="298"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="BfA-hc-HpQ">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="y9o-Kx-WEM">
+                                    <rect key="frame" x="434" y="1" width="15" height="298"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="8Tu-72-IjX" secondAttribute="bottom" id="Ab7-nX-L3q"/>
+                            <constraint firstItem="8Tu-72-IjX" firstAttribute="top" secondItem="SAh-ZP-npY" secondAttribute="top" id="Bbt-NF-NrZ"/>
+                            <constraint firstItem="8Tu-72-IjX" firstAttribute="leading" secondItem="SAh-ZP-npY" secondAttribute="leading" id="Dvi-RC-KKv"/>
+                            <constraint firstAttribute="trailing" secondItem="8Tu-72-IjX" secondAttribute="trailing" id="bV5-yz-AsN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="hdQ-KQ-JcH" id="JdY-8c-VRX"/>
+                    </connections>
+                </viewController>
+                <customObject id="3uL-6u-Dto" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="633" y="754"/>
         </scene>
     </scenes>
     <resources>

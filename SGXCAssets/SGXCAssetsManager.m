@@ -304,7 +304,9 @@ NSString * const SGRenderingIntentOriginal = @"original";
         
         SGXCAssetsRenderAs currentRenderAs = [self getRenderAsWithContentJson:contentsJson];
         
-        contentsJson = [self updateRenderAs:_renderAs contentJson:contentsJson];
+        if (_renderAs != SGXCAssetsRenderAsOverride) {
+            contentsJson = [self updateRenderAs:_renderAs contentJson:contentsJson];
+        }
         
         contentsJsons[key] = contentsJson;
         
@@ -313,7 +315,7 @@ NSString * const SGRenderingIntentOriginal = @"original";
         
         
         if ([fileManager contentsEqualAtPath:imagePath andPath:destinationPath]) {
-            if (currentRenderAs != _renderAs) {
+            if (currentRenderAs != _renderAs && _renderAs != SGXCAssetsRenderAsOverride) {
                 [_result.updateFiles addObject:[NSString stringWithFormat:@"File: %@     Sacle: %@", key, scale]];
             }
             continue;

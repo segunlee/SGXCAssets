@@ -10,6 +10,7 @@
 "YES" = "네";
 "NO" = "아니오";
 "CONFIRM" = "확인";
+"RESULT_DETAIL" = "결과 자세히 보기";
 
 "CREATE?" = "생성 모드란?";
 "CREATEDESC" = "선택한 이미지를 .xcassets에 추가합니다.\n기존 이미지가 있다면 무시됩니다.\n\n.xcassets의 폴더구조는 지원하지 않습니다.";
