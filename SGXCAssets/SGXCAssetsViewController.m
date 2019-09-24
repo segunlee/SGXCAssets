@@ -55,6 +55,10 @@
     // Unregister block dragging
     [_aImageView unregisterDraggedTypes];
     [_iImageView unregisterDraggedTypes];
+	
+	// Dragging Zone
+	[self updateAStuff:NO];
+	[self updateIStuff:NO];
 }
 
 
@@ -196,7 +200,7 @@
 }
 
 
-- (IBAction)didTappedHelpCreate:(id)sender {
+- (IBAction)didTapHelpCreate:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setAlertStyle:NSAlertStyleInformational];
     [alert setMessageText:NSLocalizedString(@"CREATE?", nil)];
@@ -205,7 +209,7 @@
     [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
 }
 
-- (IBAction)didTappedHelpUpdate:(id)sender {
+- (IBAction)didTapHelpUpdate:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setAlertStyle:NSAlertStyleInformational];
     [alert setMessageText:NSLocalizedString(@"UPDATE?", nil)];
@@ -214,7 +218,7 @@
     [alert beginSheetModalForWindow:SGWindowInstance completionHandler:nil];
 }
 
-- (IBAction)didTappedHelpDelete:(id)sender {
+- (IBAction)didTapHelpDelete:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setAlertStyle:NSAlertStyleInformational];
     [alert setMessageText:NSLocalizedString(@"DELETE?", nil)];

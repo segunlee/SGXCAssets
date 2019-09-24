@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -250,7 +249,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="didTappedHelpUpdate:" target="XfG-lQ-9wD" id="Oue-Kk-ESX"/>
+                                            <action selector="didTapHelpUpdate:" target="XfG-lQ-9wD" id="Oue-Kk-ESX"/>
                                         </connections>
                                     </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cJR-1Q-g7j">
@@ -260,7 +259,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="didTappedHelpDelete:" target="XfG-lQ-9wD" id="hki-ld-d3T"/>
+                                            <action selector="didTapHelpDelete:" target="XfG-lQ-9wD" id="hki-ld-d3T"/>
                                         </connections>
                                     </button>
                                     <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dMn-Fe-lNh">
@@ -270,7 +269,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="didTappedHelpCreate:" target="XfG-lQ-9wD" id="6Ea-fn-yGw"/>
+                                            <action selector="didTapHelpCreate:" target="XfG-lQ-9wD" id="6Ea-fn-yGw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -350,7 +349,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <clipView key="contentView" drawsBackground="NO" id="gdc-7a-HP1">
                                     <rect key="frame" x="1" y="1" width="433" height="298"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="hdQ-KQ-JcH">
                                             <rect key="frame" x="0.0" y="0.0" width="433" height="298"/>
