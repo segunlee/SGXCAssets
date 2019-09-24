@@ -28,7 +28,15 @@ NSString * const SGProperties = @"properties";
 NSString * const SGRenderingIntent = @"template-rendering-intent";
 NSString * const SGRenderingIntentTemplate = @"template";
 NSString * const SGRenderingIntentOriginal = @"original";
+NSString * const SGFileStorPatheKey = @"_STORE_PATH";
 
+
+@interface NSString (Trimming)
+@property (nonatomic, readonly) NSString *trimming;
+@end
+@implementation NSString (Trimming)
+- (NSString *)trimming { return [self stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]]; }
+@end
 
 
 @implementation SGXCAssetsManagerResult
@@ -208,8 +216,13 @@ NSString * const SGRenderingIntentOriginal = @"original";
             }
         }
         
-        
-        NSString *imageSetPath = [self imageSetPathWithAssetPath:self.xcassetsPath fileName:key];
+		
+		NSString *pathKey = [NSString stringWithFormat:@"%@%@", key, SGFileStorPatheKey];
+        NSString *imageSetPath = contentsJsons[pathKey];
+		if (imageSetPath.length == 0) {
+			imageSetPath = self.xcassetsPath;
+			imageSetPath = [[imageSetPath stringByAppendingPathComponent:key] stringByAppendingPathExtension:SGPathExtensionImageSet];
+		}
         NSDictionary *contentsJson = contentsJsons[key];
         
         // If exist (scale), continue process
@@ -265,7 +278,13 @@ NSString * const SGRenderingIntentOriginal = @"original";
     // contentsJsons Update
     for (NSString *key in [contentsJsons allKeys])
     {
-        NSString *imageSetPath = [self imageSetPathWithAssetPath:self.xcassetsPath fileName:key];
+		if ([key hasSuffix:SGFileStorPatheKey]) { continue; }
+		NSString *pathKey = [NSString stringWithFormat:@"%@%@", key, SGFileStorPatheKey];
+		NSString *imageSetPath = contentsJsons[pathKey];
+		if (imageSetPath.length == 0) {
+			imageSetPath = self.xcassetsPath;
+			imageSetPath = [[imageSetPath stringByAppendingPathComponent:key] stringByAppendingPathExtension:SGPathExtensionImageSet];
+		}
         NSString *jsonPath = [imageSetPath stringByAppendingPathComponent:SGContentJSONFileName];
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:contentsJsons[key] options:NSJSONWritingPrettyPrinted error:NULL];
         [jsonData writeToFile:jsonPath atomically:YES];
@@ -295,8 +314,14 @@ NSString * const SGRenderingIntentOriginal = @"original";
                 }
             }
         }
-        
-        NSString *imageSetPath = [self imageSetPathWithAssetPath:self.xcassetsPath fileName:key];
+		
+		
+		NSString *pathKey = [NSString stringWithFormat:@"%@%@", key, SGFileStorPatheKey];
+		NSString *imageSetPath = contentsJsons[pathKey];
+		if (imageSetPath.length == 0) {
+			imageSetPath = self.xcassetsPath;
+			imageSetPath = [[imageSetPath stringByAppendingPathComponent:key] stringByAppendingPathExtension:SGPathExtensionImageSet];
+		}
         NSDictionary *contentsJson = contentsJsons[key];
         
         // If not exist, continue process
@@ -337,10 +362,51 @@ NSString * const SGRenderingIntentOriginal = @"original";
         
         // contentsJson Setting
         for (NSMutableDictionary *imageInfo in contentsJson[SGImagesKey]) {
-            if ([imageInfo[SGScaleKey] isEqualToString:scale] == YES) {
-                imageInfo[SGFileNameKey] = fileName;
-                break;
-            }
+            if ([imageInfo[SGScaleKey] isEqualToString:scale] == YES)
+			{
+				
+				// NOTE: if not same file name, then delete old linked file
+				NSString *oldFileName = imageInfo[SGFileNameKey];
+				if ([oldFileName isEqualToString:fileName.trimming] == NO) {
+					NSString *trashOldFilePath = [imageSetPath stringByAppendingPathComponent:oldFileName];
+					[fileManager trashItemAtURL:[NSURL fileURLWithPath:trashOldFilePath] resultingItemURL:nil error:NULL];
+				}
+				
+				// NOTE: Update json
+                imageInfo[SGFileNameKey] = fileName.trimming; // new btn_arrow_back.png
+			}
+			else
+			{
+				// NOTE: Check file name (if diff, then do rename)
+				NSString *oldFileName = imageInfo[SGFileNameKey]; // btnArrowBack.png or btnArrowBack@2x.png or btnArrowBack@3x.png
+				if (oldFileName.length > 0) {
+					NSString *s_pathExtension = [oldFileName pathExtension];
+					NSString *s_scale = imageInfo[SGScaleKey];
+					
+					NSString *newFileName = nil;
+					
+					if ([imageInfo[SGScaleKey] isEqualToString:SGScale1XValue]) {
+						newFileName = [[key stringByAppendingString:@"."] stringByAppendingString:s_pathExtension];
+					}
+					
+					if ([imageInfo[SGScaleKey] isEqualToString:SGScale2XValue] || [imageInfo[SGScaleKey] isEqualToString:SGScale3XValue]) {
+						newFileName = [[[[key stringByAppendingString:@"@"] stringByAppendingString:s_scale] stringByAppendingString:@"."] stringByAppendingString:s_pathExtension];
+					}
+					
+					if ([oldFileName isEqualToString:newFileName] && newFileName.length > 0) {
+						continue;
+					}
+					
+					// NOTE: Do rename
+					NSString *oldNamePath = [imageSetPath stringByAppendingPathComponent:oldFileName];
+					NSString *newNamePath = [imageSetPath stringByAppendingPathComponent:newFileName];
+					BOOL isSuccess = [fileManager moveItemAtPath:oldNamePath toPath:newNamePath error:NULL];
+					if (isSuccess) {
+						// NOTE: Update json
+						imageInfo[SGFileNameKey] = newFileName;
+					}
+				}
+			}
         }
     }
     
@@ -348,7 +414,13 @@ NSString * const SGRenderingIntentOriginal = @"original";
     // contentsJsons Update
     for (NSString *key in [contentsJsons allKeys])
     {
-        NSString *imageSetPath = [self imageSetPathWithAssetPath:self.xcassetsPath fileName:key];
+		if ([key hasSuffix:SGFileStorPatheKey]) { continue; }
+		NSString *pathKey = [NSString stringWithFormat:@"%@%@", key, SGFileStorPatheKey];
+		NSString *imageSetPath = contentsJsons[pathKey];
+		if (imageSetPath.length == 0) {
+			imageSetPath = self.xcassetsPath;
+			imageSetPath = [[imageSetPath stringByAppendingPathComponent:key] stringByAppendingPathExtension:SGPathExtensionImageSet];
+		}
         NSString *jsonPath = [imageSetPath stringByAppendingPathComponent:SGContentJSONFileName];
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:contentsJsons[key] options:NSJSONWritingPrettyPrinted error:NULL];
         [jsonData writeToFile:jsonPath atomically:YES];
@@ -366,8 +438,14 @@ NSString * const SGRenderingIntentOriginal = @"original";
     
     for(NSString *key in [contentsJsons allKeys])
     {
-        NSString *imageSetPath = [self imageSetPathWithAssetPath:self.xcassetsPath fileName:key];
-        
+		if ([key hasSuffix:SGFileStorPatheKey]) { continue; }
+		NSString *pathKey = [NSString stringWithFormat:@"%@%@", key, SGFileStorPatheKey];
+		NSString *imageSetPath = contentsJsons[pathKey];
+		if (imageSetPath.length == 0) {
+			imageSetPath = self.xcassetsPath;
+			imageSetPath = [[imageSetPath stringByAppendingPathComponent:key] stringByAppendingPathExtension:SGPathExtensionImageSet];
+		}
+		
         BOOL used = NO;
         for (NSString *imagePath in self.imagesPaths)
         {
@@ -417,28 +495,42 @@ NSString * const SGRenderingIntentOriginal = @"original";
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
     
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NSArray *contents = [fileManager contentsOfDirectoryAtPath:assetPath error:nil];
+	NSError *error = nil;
+    NSArray *contents = [fileManager contentsOfDirectoryAtPath:assetPath error:&error];
+	if (error) {
+		NSLog(@"%@", error.localizedDescription);
+	}
     for (NSString *path in contents) {
-        
-        if ([[path pathExtension] isEqualToString:SGPathExtensionImageSet] == YES)
+		
+		if ([[path pathExtension] isEqualToString:@""]) {
+			NSString *innerPath = [assetPath stringByAppendingPathComponent:path];
+			[result addEntriesFromDictionary:[self contentsJsonsWithAssetPath:innerPath]];
+		}
+		else if ([[path pathExtension] isEqualToString:SGPathExtensionImageSet] == YES)
         {
-            NSString *jsonPath = [[assetPath stringByAppendingPathComponent:path] stringByAppendingPathComponent:SGContentJSONFileName];
-            
-            if ([fileManager fileExistsAtPath:jsonPath] == YES)
-            {
-                NSData *data = [NSData dataWithContentsOfFile:jsonPath];
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:NULL];
-                
-                if (json != nil)
-                {
-                    NSString *key = [path stringByDeletingPathExtension];
-                    result[key] = json;
-                }
-            }
+			[self makeJsonInoutMutableDictionary:result assetPath:assetPath path:path];
         }
     }
     
     return result;
+}
+
+- (void)makeJsonInoutMutableDictionary:(NSMutableDictionary *)source assetPath:(NSString *)assetPath path:(NSString *)path {
+	NSString *jsonPath = [[assetPath stringByAppendingPathComponent:path] stringByAppendingPathComponent:SGContentJSONFileName];
+	NSFileManager *fileManager = [[NSFileManager alloc] init];
+	if ([fileManager fileExistsAtPath:jsonPath] == YES)
+	{
+		NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+		NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:NULL];
+		
+		if (json != nil)
+		{
+			NSString *key = [path stringByDeletingPathExtension];
+			NSString *pathKey = [NSString stringWithFormat:@"%@%@", key, SGFileStorPatheKey];
+			source[key] = json;
+			source[pathKey] = [jsonPath stringByDeletingLastPathComponent];
+		}
+	}
 }
 
 - (NSDictionary *)makeEmptyContentJson {

@@ -13,13 +13,13 @@
 "RESULT_DETAIL" = "Result Details";
 
 "CREATE?" = "Create?";
-"CREATEDESC" = "Add images to .xcassets\nIf there are duplicate images, ignore them.\n\nNot support folder in .xcassets";
+"CREATEDESC" = "Add images to .xcassets\nIf there are duplicate images, ignore them.";
 
 "UPDATE?" = "Update?";
-"UPDATEDESC" = "Update the image in the existing .xcassets.\nIgnore any images that are not generated.\n\nNot support folder in .xcassets";
+"UPDATEDESC" = "Update the image in the existing .xcassets.\nIgnore any images that are not generated.";
 
 "DELETE?" = "Delete?";
-"DELETEDESC" = "Delete images by comparing them with 'Drag into Images' and Images in .xcassets\n\nNot support folder in .xcassets";
+"DELETEDESC" = "Delete images by comparing them with 'Drag into Images' and Images in .xcassets";
 
 "DELETE_ALERT_FORMAT" = "Found %zd unused image files.\nAre you sure you want to delete?\n\n%@";
 
